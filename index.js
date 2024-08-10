@@ -1,20 +1,25 @@
 import express from 'express'
 import { graphql, buildSchema } from 'graphql'
 const app = express()
-import { store, setInformation } from "./redux-store/store.js"
+import { store, setUser } from "./redux-store/store.js"
 app.use(express.json())
 
 const schema = buildSchema(`
+    type User{
+        name: String!
+        id: String!
+    },
     type Query{
-        informations: String
+        user(name: String!, id: String!): User!
     }    
 `)
 
 const root = {
-    informations: ({id}) => {
-        store.dispatch(setInformation('duzia'))
+    user: ({name, id}) => {
+        store.dispatch(setUser({id, name}))
         const state = store.getState()
-        return state.informations.value
+        console.log(state)
+        return {name, id}
     }
 }
 

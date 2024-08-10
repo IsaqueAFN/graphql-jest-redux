@@ -1,19 +1,19 @@
 import { createSlice, configureStore } from '@reduxjs/toolkit'
 
-const informationsSlice = createSlice({
-    name: 'informations',
-    initialState: {value: 'data'},
+const userSlice = createSlice({
+    name: 'users',
+    initialState: {value: []},
     reducers: {
-        setInformation: (state, action) => {
-            state.value = action.payload
+        setUser: (state, action) => {
+            state.value = [...state.value, JSON.stringify(action.payload)]
         }
     }
 })
 
 export const store = configureStore({
     reducer:{
-        informations: informationsSlice.reducer
+        userSlice: userSlice.reducer
     }
 })
 
-export const { setInformation } = informationsSlice.actions
+export const { setUser } = userSlice.actions

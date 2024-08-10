@@ -3,7 +3,10 @@ const axios = require('axios')
 describe('GraphQL testing', () => {
     it('Should be return a sucessfull GraphQL Query', async() => {
         const query = `query{
-            informations
+            user(name: "Isaque", id: "1"){
+                name
+                id
+            }
         }`
 
         const response = await axios.post('http://localhost:4000/graphql', {query})
